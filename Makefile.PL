@@ -62,11 +62,11 @@ WriteMakefile(
     LDFLAGS            => $LDFLAGS,
     NAME               => 'Alien-Gearman',
     CONFIGURE_REQUIRES => {
-        'Archive::Tar' => 0,
-        'File::Spec'   => 0,
-        'IO::Zlib'     => 0,
+        'Alien::Libevent' => '0.01000',
+        'Archive::Tar'    => 0,
+        'File::Spec'      => 0,
+        'IO::Zlib'        => 0,
     },
-    PREREQ_PM => { 'Alien::Libevent' => '0.01000' },
     VERSION   => $VERSION,
 );
 
