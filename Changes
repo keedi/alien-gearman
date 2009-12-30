@@ -1,4 +1,7 @@
 Revision history for Alien-Gearman
 
+0.01001  Wed Dec 30 2009
+         - Fix typo in Makefile.PL
+
 0.01000  Wed Dec 30 2009
          - Initial release.

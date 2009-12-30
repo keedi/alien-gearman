@@ -53,7 +53,7 @@ EOF
 }
 
 extract( $PKG => $SRC );
-run_configure( libevent => $SRC );
+run_configure( libgearman => $SRC );
 
 WriteMakefile(
     ABSTRACT           => 'Wrapper for installing libgearman v0.11',
