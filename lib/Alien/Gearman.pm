@@ -3,7 +3,7 @@ package Alien::Gearman;
 use strict;
 use warnings;
 
-our $VERSION = '0.01002';
+our $VERSION = '0.01003';
 
 =head1 NAME
 

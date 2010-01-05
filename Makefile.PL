@@ -25,35 +25,49 @@ my $VERSION = do {
     require ExtUtils::MM_Unix;
     ExtUtils::MM_Unix->parse_version($DIST);
 };
+my $LIBGEARMAN_VERSION = '0.11';
 
 my $CCFLAGS = $ENV{CCFLAGS} || '-I/usr/local/include';
 my $LDFLAGS = $ENV{LDFLAGS} || '-L/usr/local/lib';
 
 eval { Devel::CheckLib::assert_lib( lib => "gearman", LIBS => $LDFLAGS ) };
 
+my $install_libgearman = 1;
 if ( !$@ ) {
     print <<EOF;
 
-*** We've detected a previous installation of libgearman ***
+*** We've detected an existing installation of libgearman ***
+
+That existing installation of libgearman may have been installed before by:
+
+  * your distributions packaging system
+  * previous installation of Alien::Gearman
+  * compiling/installing it manually from source
 
 Because Alien::Gearman may have been called to be installed from a dependency
 of another module, we want to make sure that you *really* want to install
-this version of Alien::Gearman (and therefore libgearman).
+this version of libgearman.
 
-If you answer "y", then We're going to install
-    libgearman: $VERSION
+If you answer "y", then we're going to install
+    Alien::Gearman: $VERSION
+    libgearman:     $LIBGEARMAN_VERSION
+
+If you answer "n", then we're going to install
+    Alien::Gearman: $VERSION
 
 This operation may OVERWRITE your previous installation, you've been warned!
 
 EOF
     my $yn = prompt( "Really install?", "n" );
     if ( $yn !~ /^y(?:es)?$/ ) {
-        exit 0;
+        $install_libgearman = 0;
     }
 }
 
-extract( $PKG => $SRC );
-run_configure( libgearman => $SRC );
+if ($install_libgearman) {
+    extract( $PKG => $SRC );
+    run_configure( libgearman => $SRC );
+}
 
 WriteMakefile(
     ABSTRACT           => 'Wrapper for installing libgearman v0.11',
@@ -62,7 +76,7 @@ WriteMakefile(
     LDFLAGS            => $LDFLAGS,
     NAME               => 'Alien-Gearman',
     CONFIGURE_REQUIRES => {
-        'Alien::Libevent' => '0.01000',
+        'Alien::Libevent' => '0.01004',
         'Archive::Tar'    => 0,
         'File::Spec'      => 0,
         'IO::Zlib'        => 0,
@@ -122,20 +136,22 @@ package MY;
 
 sub top_targets {
     my $inherited = shift->SUPER::top_targets(@_);
+    return $inherited unless $install_libgearman;
     $inherited =~ s/^all :: /all :: libgearman /;
     return $inherited;
 }
 
 sub constants {
     my $inherited = shift->SUPER::constants(@_);
-
+    return $inherited unless $install_libgearman;
     $inherited .= "LIBGEARMAN_SRC=$SRC\n";
-
     return $inherited;
 }
 
 sub postamble {
-    my $make_str;
+    my $make_str = '';
+
+    return $make_str unless $install_libgearman;
 
     $make_str = <<'MAKE_FRAG';
 

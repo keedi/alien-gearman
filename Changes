@@ -1,5 +1,9 @@
 Revision history for Alien-Gearman
 
+0.01003  Tue Jan 05 2010
+         - Fix broken behaviour when answering
+           'really install?' with 'no' # BinGOs++
+
 0.01002  Sun Jan 03 2010
          - Added test
 
