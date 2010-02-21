@@ -1,2 +1,1 @@
-steps = CheckChangeLog, DistTest, Commit, Tag, MakeDist, UploadCPAN
-git.push_to = origin
+steps = CheckChangeLog, DistTest, Commit, MakeDist, UploadCPAN
