@@ -16,8 +16,8 @@ if ( $^O eq 'MSWin32' ) {
 
 my $CWD  = Cwd::cwd();
 my $DIST = File::Spec->catfile(qw(lib Alien Gearman.pm));
-my $PKG  = File::Spec->catfile(qw(src gearmand-0.11.tar.gz));
-my $SRC  = File::Spec->catfile(qw(src gearmand-0.11));
+my $PKG  = File::Spec->catfile(qw(src gearmand-0.12.tar.gz));
+my $SRC  = File::Spec->catfile(qw(src gearmand-0.12));
 
 $_ = File::Spec->rel2abs($_) for $PKG, $SRC, $DIST;
 
@@ -25,7 +25,7 @@ my $VERSION = do {
     require ExtUtils::MM_Unix;
     ExtUtils::MM_Unix->parse_version($DIST);
 };
-my $LIBGEARMAN_VERSION = '0.11';
+my $LIBGEARMAN_VERSION = '0.12';
 
 my $CCFLAGS = $ENV{CCFLAGS} || '-I/usr/local/include';
 my $LDFLAGS = $ENV{LDFLAGS} || '-L/usr/local/lib';
@@ -70,7 +70,7 @@ if ($install_libgearman) {
 }
 
 WriteMakefile(
-    ABSTRACT           => 'Wrapper for installing libgearman v0.11',
+    ABSTRACT           => 'Wrapper for installing libgearman v0.12',
     AUTHOR             => 'Johannes Plunien <plu@cpan.org>',
     CCFLAGS            => $CCFLAGS,
     LDFLAGS            => $LDFLAGS,

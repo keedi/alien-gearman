@@ -19,9 +19,11 @@ COPYRIGHT AND LICENSE
     under the same terms as Perl itself.
 
 SEE ALSO
-    * Alien
-    * Gearman::XS
-    * <http://www.gearman.org/>
+    *   Alien
+
+    *   Gearman::XS
+
+    *   <http://www.gearman.org/>
 
 REPOSITORY
     <http://github.com/plu/alien-gearman/>
