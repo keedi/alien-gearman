@@ -35,4 +35,5 @@
 ^sloccount\.sc$
 ^.*\.log$
 ^Alien-Gearman-.*
-^src/gearmand-0\.11/.*
+^src/gearmand-0\.12/.*
+^\.shipit
